@@ -1,5 +1,5 @@
 {
-  "name": "tasty-recipe-scraper",
+  "name": "park-info-scraper",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,17 +13,17 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "test",
+    "start": "node start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PersephoneUnderground/tasty-recipe-scraper.git"
+    "url": "git+https://github.com/PersephoneUnderground/park-info-scraper.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PersephoneUnderground/tasty-recipe-scraper/issues"
+    "url": "https://github.com/PersephoneUnderground/park-info-scraper/issues"
   },
-  "homepage": "https://github.com/PersephoneUnderground/tasty-recipe-scraper#readme"
+  "homepage": "https://github.com/PersephoneUnderground/park-info-scraper#readme"
 }
