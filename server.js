@@ -12,16 +12,24 @@ var PORT = process.env.PORT || 3000;
 var app = express(); //instantiate app
 var router = express.Router(); //set up router
 
+//import routes file and pass it the express router set up above as an argument
+require("./config/routes")(router);
+
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
+
 
 // Connect Handlebars and express
-app.engine("handlebars", expressHandlebars({ defaultLayout: "main" }));
+app.engine("handlebars", expressHandlebars({
+  defaultLayout: "main" 
+}));
 app.set("view engine", "handlebars");
 
 //BODY-PARSER STANDARD SETUP WITH EXPRESS
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+// app.use(bodyParser.json());
 
 //Send requests through Router middleware
 app.use(router);
