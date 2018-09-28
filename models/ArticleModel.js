@@ -18,13 +18,15 @@ var eventArticleSchema = new Schema({
         type: String,
         required: true
     },
-    eventDate: {
-
-    },
-    eventTime: {
-
-    },
-    postedDate: {
-
+    eventDate: String,
+    eventTime: String,
+    postedDate: String,
+    saved: {
+        type: Boolean,
+        default: false
     }
 });
+
+var eventArticle = mongoose.model("eventArticle", eventArticleSchema);
+
+module.exports = eventArticle;
