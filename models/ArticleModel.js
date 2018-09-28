@@ -9,6 +9,7 @@ var eventArticleSchema = new Schema({
         type: String,
         required: true,
         unique: true
+        // unique here is to prevent repeated scraping of the same posting
     },
     summary: {
         type: String,
@@ -24,7 +25,7 @@ var eventArticleSchema = new Schema({
     saved: {
         type: Boolean,
         default: false
-    }
+    } //"saved" variable tracks whether the user has chosen to save the listing
 });
 
 var eventArticle = mongoose.model("eventArticle", eventArticleSchema);
