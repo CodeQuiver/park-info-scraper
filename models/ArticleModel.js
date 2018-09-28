@@ -11,6 +11,11 @@ var eventArticleSchema = new Schema({
         unique: true
         // unique here is to prevent repeated scraping of the same posting
     },
+    eventUrl: {
+        // double-check that String is correct for url
+        type: String,
+        required: false
+    },
     summary: {
         type: String,
         required: true
