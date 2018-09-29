@@ -4,8 +4,7 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 //step 1- review park service website and identify the classes and tags around each piece of information we need
-    //we need: event name, summary, article link, location, event date, event time
-    //to begin, we'll only use the event name and summary, once those work we'll add the other pieces of information
+    //we need: article title, summary, url of full article
 //step 2 - navigate page using cheerio to scrape the items above
 
 var scrape = function(callback) {
