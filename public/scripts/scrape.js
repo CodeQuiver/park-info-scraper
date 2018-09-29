@@ -9,7 +9,7 @@ var cheerio = require("cheerio");
 
 var scrape = function(callback) {
     request("https://parks.arlingtonva.us", function(error, response, body){
-        var $ = cheerio.load(body);
+        var $ = cheerio.load(body); //sets $ as the selector, similat to jQuery
 
         var articleArray = [];
 
@@ -19,12 +19,51 @@ var scrape = function(callback) {
             // each of these sections is labeled "text-with-photo-gizmo"
             // get title from h2
             // get summary from div.blurb
+            // get any links with a href
+        $(".text-with-photo-gizmo").each(function(i, element) {
+            var title = $(this).children("h2").text().trim();
+            var summary = $(this).children(".blurb").text().trim();
+            var link = $(this).children("a").attr('href');
+
+            if (title && summary && link) {
+                var infoToPush = {
+                    articleTitle: title,
+                    articleSummary: summary,
+                    articleUrl: link
+                };
+                
+                articleArray.push(infoToPush);
+
+            } else if (title && summary) {
+                var infoToPush = {
+                    articleTitle: title,
+                    articleSummary: summary
+                };
+                
+                articleArray.push(infoToPush);
+
+            } else if (title && link) {
+                var infoToPush = {
+                    articleTitle: title,
+                    articleUrl: link
+                };
+                
+                articleArray.push(infoToPush);
+                
+            } else {
+                console.log("a headline was not scraped due to lack of information available");
+                continue;
+            };
+
+            callback(articleArray);
+        });
 
         //END SCRAPE HIGHLIGHTS SECTION
 
+        
         //SCRAPE EACH SLIDE IN SLIDESHOW SECTION
         //targeting the slideshow first since it includes some things not in rest of page, seems to be the actual most important items
-        $(".slide").each(function(i, element) {
+        // $(".slide").each(function(i, element) {
             
                 // pull blurb (becomes summary in model)
                     // ".blurb" text
@@ -36,7 +75,7 @@ var scrape = function(callback) {
                             // (OPTIONAL- regex to remove "Arlington Parks" or "Parks and Recreation" if those exact phrases are there, or possibly everything after a " - " separator because usual syntax is name then separator then the repetitive page designation)
                         // return title to outer function
             
-        });
+        // });
         //END SCRAPE SLIDESHOW SECTION
 
 
