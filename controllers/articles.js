@@ -7,7 +7,8 @@ var Article = require("../models/ArticleModel");
 var Comment = require("../models/CommentModel");
 
 module.exports = {
-    fetch: function (callback) {
+    //fetch = Create CRUD function
+    fetch: function(callback) {
         scrape(function(data) {
             var articles = data;
             
@@ -26,5 +27,32 @@ module.exports = {
             //if any errors occur the function will keep going and simply return the errors
 
         })
+    },
+    // get = Read CRUD function
+    get: function(query, callback) {
+        Article.find(query)
+        .sort({
+            _id: -1
+        })
+        .exec(function(error, document) {
+            callback(document);
+        });        
+    },
+    //Update CRUD function
+    update: function(query, callback) {
+        Article.update(
+            {
+                _id: query._id
+            },
+            {
+                $set: query
+            },
+            {},
+            callback
+        );
+    },
+    //Delete CRUD function
+    delete: function(query, callback) {
+        Article.remove(query, callback);
     }
 }
