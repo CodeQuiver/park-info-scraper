@@ -4,28 +4,33 @@ var Schema = mongoose.Schema;
 
 // this is the schema for the object containing the info for each event scraped
 // will need to adjust to info available but setting up with basic data wanted for now
-var eventArticleSchema = new Schema({
-    eventName: {
+var articleSchema = new Schema({
+    articleTitle: {
         type: String,
         required: true,
         unique: true
         // unique here is to prevent repeated scraping of the same posting
     },
-    eventUrl: {
+    articleUrl: {
         // double-check that String is correct for url
         type: String,
-        required: false
+        required: true,
+        unique: true
     },
     summary: {
         type: String,
-        required: true
+        required: false
     },
-    location: {
-        type: String,
-        required: true
-    },
-    eventDate: String,
-    eventTime: String,
+    // content: {
+    //     type: String,
+    //     required: false
+    // },
+    // location: {
+    //     type: String,
+    //     required: true
+    // },
+    // eventDate: String,
+    // eventTime: String,
     postedDate: String,
     saved: {
         type: Boolean,
