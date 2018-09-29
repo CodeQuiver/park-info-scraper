@@ -1,10 +1,12 @@
+//controller file for articles
+// ============================
+
 //import scrape script and setupDate script
 var scrape = require("../scripts/scrape");
 var setupDate = require("../scripts/dateformat");
 
-//import article and comment models
+//import article model
 var Article = require("../models/ArticleModel");
-var Comment = require("../models/CommentModel");
 
 module.exports = {
     //fetch = Create CRUD function
@@ -13,7 +15,7 @@ module.exports = {
             var articles = data;
             
             for (var i=0; i<articles.length; i++){
-                articles[i].date = makeDate();
+                articles[i].scrapedDate = setupDate();
                 articles[i].saved = false;
             }
 
@@ -28,7 +30,7 @@ module.exports = {
 
         })
     },
-    // get = Read CRUD function
+    // get - Read CRUD function
     get: function(query, callback) {
         Article.find(query)
         .sort({

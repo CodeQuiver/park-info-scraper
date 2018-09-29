@@ -31,13 +31,13 @@ var articleSchema = new Schema({
     // },
     // eventDate: String,
     // eventTime: String,
-    postedDate: String,
+    scrapedDate: String,
     saved: {
         type: Boolean,
         default: false
     } //"saved" variable tracks whether the user has chosen to save the listing
 });
 
-var eventArticle = mongoose.model("eventArticle", eventArticleSchema);
+var eventArticle = mongoose.model("eventArticle", articleSchema);
 
 module.exports = eventArticle;
