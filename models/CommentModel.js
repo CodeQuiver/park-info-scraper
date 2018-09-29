@@ -10,7 +10,13 @@ var commentSchema = new Schema({
         ref: "eventArticle"
     },
     postedDate: String,
-    commentText: String
+    commentText: String,
+    commentAuthor: String
+    /* Added commentAuthor so users can sign their comments. 
+    They must enter it fresh every time, but this is still realistic
+    and can still be useful. 
+    There are websites where this is the method and many 
+    users use the same name regularly anyway. */
     });
 
 var Comment = mongoose.model("Comment", commentSchema);

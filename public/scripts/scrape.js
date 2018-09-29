@@ -17,13 +17,10 @@ var scrape = function(callback) {
 
         //SCRAPE HIGHLIGHTS SECTION
             // each of these sections is labeled "text-with-photo-gizmo"
-            // get title from h2
-            // get summary from div.blurb
-            // get any links with a href
         $(".text-with-photo-gizmo").each(function(i, element) {
-            var title = $(this).children("h2").text().trim();
-            var summary = $(this).children(".blurb").text().trim();
-            var link = $(this).children("a").attr('href');
+            var title = $(this).children("h2").text().trim(); // get title from h2
+            var summary = $(this).children(".blurb").text().trim(); // get summary from div.blurb
+            var link = $(this).children("a").attr('href'); // get any links with href
 
             if (title && summary && link) {
                 var infoToPush = {
@@ -61,7 +58,7 @@ var scrape = function(callback) {
         //END SCRAPE HIGHLIGHTS SECTION
 
         
-        //SCRAPE EACH SLIDE IN SLIDESHOW SECTION
+        //SCRAPE SLIDESHOW SECTION
         //targeting the slideshow first since it includes some things not in rest of page, seems to be the actual most important items
         // $(".slide").each(function(i, element) {
             
@@ -79,7 +76,7 @@ var scrape = function(callback) {
         //END SCRAPE SLIDESHOW SECTION
 
 
-        //SCRAPE LATEST NEWS SECTION URLS
+        //SCRAPE LATEST NEWS SECTION
             // section identified by "ul.display-posts-listing" (each link is within an li tag)
             // pull each url listed (will be checked for redundancy by database later)
                 //nest another request inside that requests from the item url page so we can go get a title
