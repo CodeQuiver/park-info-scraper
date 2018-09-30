@@ -16,6 +16,11 @@ var articleSchema = new Schema({
         type: String,
         required: true,
         unique: true
+        /* unique here is to prevent scraping a posting that actually is about the same
+        event/announcement as one already scraped, since sometimes the same thing
+        is highlighted in two different places on the page e.g. in the image slider and in Latest News.
+        Also prevents simple duplication of already scraped items, 
+        but urls are unique and therefore can't accidentally read as not matching when they should */
     },
     articleSummary: {
         type: String,
