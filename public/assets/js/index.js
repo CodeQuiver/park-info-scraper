@@ -38,10 +38,18 @@ function initializePage() {
 
 // PRINT ARTICLES to the article-box div
 function printArticles(articles) {
+    //function takes in a JSON array containing all articles in database
+    // pass each item in array to the "createListing" function
 
 };
 // END PRINT ARTICLES
 
+
+// CREATE SINGLE ARTICLE LISTING
+    // this will be called in printArticles, but writing as standalone because it could be reused
+    // this creates a single listing for an article from the scraped data
+    //******* to keep it simple I am starting this using jquery, but I should probably instead create a handlebars object and have handlebars deal with the layout and rendering *****
+// END CREATE SINGLE ARTICLE LISTING
 
 
 // PRINT "NO ARTICLES" MESSAGE
