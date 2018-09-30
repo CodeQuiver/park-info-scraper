@@ -23,12 +23,12 @@ function initializePage() {
     //AJAX request for unsaved articles
     $.get("/api/headlines?saved=false")
         .then(function(data) {
-            /* if unsaved articles found, render with printArticles function*/
             if (data && data.length) {
+                // if unsaved articles found, render with printArticles function
                 printArticles(data);
             } 
-            /* else render "no articles" message using printEmpty function */
             else {
+                // else render "no articles" message using printEmpty function 
                 printEmpty();
             } 
         });
@@ -43,8 +43,26 @@ function printArticles(articles) {
 // END PRINT ARTICLES
 
 
+
 // PRINT "NO ARTICLES" MESSAGE
 function printEmpty() {
+    // renders message explaining that we don't have any articles
+    // also asks user what they'd like to do and renders links for those choices
+    // set this up as a several concatenated lines for ease of reading
+    var emptyAlert = 
+    $("<div class='alert alert-warning text-center'>" +
+    "<h4>No new articles are available.</h4>" +
+    "</div>" +
+    "<div class='panel panel-default'>" +
+    "<div class='panel-heading text-center'>" +
+    "<h4><a class='new-scrape'>Scrape New Articles</a></h4>" +
+    "<h4><a href='/saved'>Go To Saved Articles</a></h4>" +
+    "</div>" +
+    "</div>"
+    );
+
+    //append emptyAlert to the articleBox div
+    articleBox.append(emptyAlert);
     
 };
 // END PRINT "NO ARTICLES" MESSAGE
