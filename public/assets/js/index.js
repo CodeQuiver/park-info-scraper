@@ -9,6 +9,7 @@ $(document).ready(function() {
 
 // ====================== GLOBAL VARIABLES ======================== //
 var articleBox = $(".article-box");
+// references the div where all the articles should be displayed
 // ====================== END GLOBAL VARIABLES ======================== //
 
 
@@ -146,14 +147,13 @@ function handleArticleScrape() {
 
 
 // ====================== MAIN PROGRAM FLOW  ======================== //
-    // first reference the div where all the articles should be displayed
-    /*  then add event listeners to dynamically generated
-    buttons- both "save article" and "scrape new article"*/
-    $(document).on("click", ".btn.save", handleArticleSave);
-    $(document).on("click", ".new-scrape", handleArticleScrape);
+/* add event listeners to dynamically generated
+buttons- both "save article" and "scrape new article"*/
+$(document).on("click", ".btn.save", handleArticleSave);
+$(document).on("click", ".new-scrape", handleArticleScrape);
 
-    //call initialize page function first thing once page is ready
-    initializePage();
+//call initialize page function first thing once page is ready
+initializePage();
 
 // ====================== END MAIN PROGRAM FLOW  ======================== //
 });
