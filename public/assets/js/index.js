@@ -60,11 +60,12 @@ function printArticles(articles) {
     create a handlebars object and have handlebars deal with the layout and rendering
     if I want to use more advanced formatting later */
     function createListing(currentArticle) {
-        var listing = $(
+        var listing = $("<div class='panel panel-default'>" +
             "<h3><a href='" + currentArticle.articleUrl + "'> " + currentArticle.articleTitle + "</a></h3>" +
             "<p>" + currentArticle.articleSummary+ "<br />" +
             "<a class='btn btn-success save'> Save Article </a>" +
-            "</p>"
+            "</p>" +
+            "</div>"
         );
 
         //then attach item id to the element
@@ -96,10 +97,46 @@ function printEmpty() {
     );
 
     //append emptyAlert to the articleBox div
-    articleBox.append(emptyAlert);
-    
+    articleBox.append(emptyAlert);    
 };
 // END PRINT "NO ARTICLES" MESSAGE
+
+
+
+// SAVE ARTICLE FUNCTION
+function handleArticleSave() {
+    //triggered when user hits button to save an article
+    //starts by retrieving the article id that was attached to the element when it was setup
+    var articleToSave = $(this).parents(".panel").data();
+    articleToSave.saved = true;
+
+    //AJAX update call
+    // patch method should be correct for updating an existing database entry
+    $.ajax({
+        method: "PATCH",
+        url: "/api/articles",
+        data: articleToSave
+    })
+    .then(function(data){
+        //if successful mongoose will send back "ok: true" so can use this to check for success
+        if (data.ok) {
+            //run initialize page function again to reload the page
+            initializePage();
+        }
+    });
+};
+// END SAVE ARTICLE FUNCTION
+
+
+// SCRAPE ARTICLE FUNCTION
+function handleArticleScrape() {
+    //triggers when user clicks a button to scrape new articles
+    $.get("/api/fetch")
+        .then(function(data) {
+            
+        })
+}
+// END SCRAPE ARTICLE FUNCTION
 
 
 // ====================== END FUNCTIONS  ======================== //

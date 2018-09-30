@@ -49,7 +49,6 @@ var scrape = function(callback) {
                 
             } else {
                 console.log("a headline was not scraped due to lack of information available");
-                continue;
             };
 
             callback(articleArray);
