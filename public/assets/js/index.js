@@ -133,8 +133,10 @@ function handleArticleScrape() {
     //triggers when user clicks a button to scrape new articles
     $.get("/api/fetch")
         .then(function(data) {
-            
-        })
+            initializePage();
+            //may add a section telling user how many new articles were scraped here, but leaving out for now
+
+        });
 }
 // END SCRAPE ARTICLE FUNCTION
 
