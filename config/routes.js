@@ -54,8 +54,54 @@ module.exports = function(router) {
         articleController.get(query, function(data) {
             res.json(data);
         });
-    })
+    });
 
+    //delete article route, based on passed id
+    router.delete("/api/articles/:id", function(req, res) {
+        var query = {};
+
+        query._id = req.params.id; //retrieves id from url :id
+        articleController.delete(query, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    //update article route (.patch)
+    router.patch("/api/articles", function(req, res) {
+        articleController.update(req.body, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    //get all comments associated with an article
+    router.get("/api/comments/:article_id?", function(req, res) {
+        var query = {};
+
+        if (req.params.article_id) {
+            query._id = req.params.article_id;
+            //if there is an article id specified in the url, get the id of the article
+        }
+
+        commentsController.get(query, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    //delete a comment
+    router.delete("/api/comments/:id", function(req, res) {
+        var query = {};
+        query._id = req.params.id; //pull id of comment from request url
+        commentsController.delete(query, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    //post a new comment on an article
+    router.post("/api/comments", function(req, res) {
+        commentsController.save(req.body, function(data){
+            res.json(data);
+        });
+    });
 
     // === END API Routes ===== //
 }
