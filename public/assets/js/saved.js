@@ -2,6 +2,8 @@
 // handles what information to display and calling of routes
 // also handles the creation and deletion of comments
 
+//****rough draft NOTE- bootbox class, need to either replace or make sure I tie in correctly in my handlebars */
+
 $(document).ready(function() {
 // makes sure nothing runs until page has completed loading
 // wraps everything so not indenting formatting here since it would just shift entire page over
@@ -160,15 +162,72 @@ function handleArticleComments() {
         .then(function(data) {
             var modalContent = [
                 "<div class = 'container-fluid text-center'>",
-                "<h4>",
+                "<h4>Comments on Article: ",
+                currentArticle._id,
+                "</h4>",
                 "<hr />",
-                "<ul class='list-group comment-container'>"
+                "<ul class='list-group comment-container'>",
+                "</ul>",
+                "<textarea placeholder='New Comment' rows='4' cols='60'></textarea>",
+                "<button class='btn btn-success save'>Save Comment</button>",
+                "</div>"
             ].join("");
-        })
+            //adds the above html to the comment modal
+            bootbox.dialog({
+                message: modalContent,
+                closeButton: true
+            });
+            var commentData = {
+                _id: currentArticle._id,
+                comments: data || []
+            };
+            //add info about the article and notes to the save button for eay access later
+            $(".btn.save").data("article", commentData);
+
+            //printCommentsList will add the actual note html inside the opened modal
+            printCommentsList(commentData);
+        });
+}
+// END ARTICLE COMMENT HANDLER 
+
+
+
+// PRINT COMMENTS LIST FUNCTION
+function printCommentsList(data) {
+    //this prints the list of comments to the comments modal when called from the comment handler
+    //sets up an array of comments to render
+    // uses a loop to render each one
+    var commentsToPrint = [];
+    var currentComment;
+
+    if (!data.comments.length) {
+        // if there are no comments on the article, have a message say that
+        currentComment = $([
+            "<li class='list-group-item'>",
+            "This article doesn't have any comments.",
+            "<a href='LINK TO POST A COMMENT HERE'>Post the first comment!</a>",
+            "</li>"
+        ].join(""));
+    }
+    else {
+        // else if there are comments to render, loop through them and print each one
+        for (var i = 0; i < data.comments.length; i++) {
+            currentComment = $([
+                
+            ].join(""));
+            
+        }
+    }
+
+
+    
+
 }
 
 
-// END ARTICLE COMMENT HANDLER 
+// END PRINT COMMENTS LIST FUNCTION
+
+
 
 // ====================== END FUNCTIONS  ======================== //
 
