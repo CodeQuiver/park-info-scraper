@@ -146,6 +146,30 @@ function handleArticleUndoSave() {
 };
 // END REMOVE FROM SAVED ARTICLES LIST FUNCTION
 
+// ARTICLE COMMENT HANDLER
+function handleArticleComments() {
+    //handles opening comments modal and displaying comments
+    //grab id of the article to get the associated comments
+    // get that id from the div.panel the comments button sits inside
+    var currentArticle = $(this).parents(".panel").data();
+    
+    //constructing the url route for the comment
+    // then constructing the html for the modal using jQuery
+    // uses an array and join for easier reading
+    $.get("/api/comments/" + currentArticle._id)
+        .then(function(data) {
+            var modalContent = [
+                "<div class = 'container-fluid text-center'>",
+                "<h4>",
+                "<hr />",
+                "<ul class='list-group comment-container'>"
+            ].join("");
+        })
+}
+
+
+// END ARTICLE COMMENT HANDLER 
+
 // ====================== END FUNCTIONS  ======================== //
 
 
