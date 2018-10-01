@@ -168,7 +168,9 @@ function handleArticleComments() {
                 "<hr />",
                 "<ul class='list-group comment-container'>",
                 "</ul>",
-                "<textarea placeholder='New Comment' rows='4' cols='60'></textarea>",
+                "<textarea class='comment-text-field' placeholder='New Comment' rows='4' cols='60'></textarea>",
+                "Posted by: <br />",
+                "<input class='comment-author-field' placeholder='Username Here' />",
                 "<button class='btn btn-success save'>Save Comment</button>",
                 "</div>"
             ].join("");
@@ -234,8 +236,37 @@ function printCommentsList(data) {
 }
 // END PRINT COMMENTS LIST FUNCTION
 
+
+
 // SAVE COMMENT HANDLER
+function handleCommentSave() {
+    //this handles what happens when a user tries to save a new comment on an article
+    // sets a variable to hold the comment data
+    // grabs the note typed into the comment input box (added class comment-text-field to that textarea in my html)
+    // grabs the username typed into the username input box (added class comment-author-field to that input html)
+    var commentData;
+    var newComment = $(".comment-text-field textarea").val().trim();
+    var newAuthor = $(".comment-author-field input").val().trim();
+    //if there is data in the comment text field and the author field, 
+    // format and post to the "/api/comments" route and send the formatted commentData as well
+    //else (if either or both are empty) alert user that both fields are required to post a comment
+    if (newComment && newAuthor) {
+        commentData = {
+            _id: $(this).data("article")._id,
+            commentText: newComment,
+            commentAuthor: newAuthor
+        };
+        $.post("/api/comments", commentData).then(function() {
+            //when post is done, close the modal
+            bootbox.hideAll();
+        });
+    }
+    else {
+        alert("We're sorry, your comment couldn't be added because information was missing. Please fill out both fields to submit a comment.");
+    };
+}
 // END SAVE COMMENT HANDLER
+
 
 
 // DELETE COMMENT HANDLER
