@@ -205,27 +205,42 @@ function printCommentsList(data) {
         currentComment = $([
             "<li class='list-group-item'>",
             "This article doesn't have any comments.",
-            "<a href='LINK TO POST A COMMENT HERE'>Post the first comment!</a>",
             "</li>"
         ].join(""));
+        commentsToPrint.push(currentComment);
     }
     else {
         // else if there are comments to render, loop through them and print each one
         for (var i = 0; i < data.comments.length; i++) {
             currentComment = $([
-                
+            "<li class='list-group-item comment'>",
+            data.comments[i].commentText,
+            "<br />",
+            "Posted by: <span class='comment-author'>",
+            data.comments[i].commentAuthor,
+            "</span>",
+            "<button class='btn btn-danger comment-delete'>",
+            "Delete Comment</button>",
+            "</li>"
             ].join(""));
-            
+            // store the comment id as data attached to the delete button for easy access when trying to delete later
+            currentComment.children("button").data("_id", data.comments[i]._id);
+            // finally, add our current comment to the commentsToPrint array
+            commentsToPrint.push(currentComment);
         }
     }
-
-
-    
-
+    // append the commentsToPrint to the comment-container inside the comment modal
+    $(".comment-container").append(commentsToPrint);
 }
-
-
 // END PRINT COMMENTS LIST FUNCTION
+
+// SAVE COMMENT HANDLER
+// END SAVE COMMENT HANDLER
+
+
+// DELETE COMMENT HANDLER
+// END DELETE COMMENT HANDLER
+
 
 
 
