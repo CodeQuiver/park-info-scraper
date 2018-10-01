@@ -270,6 +270,27 @@ function handleCommentSave() {
 
 
 // DELETE COMMENT HANDLER
+function handleCommentDelete() {
+    // handles when a user clicks the delete button on a comment
+    // for now, since there's no way to track different users, any user can delete any comment
+    /* later wouold probably want to improve this with at minimum making it a soft delete only
+    (like the "un-save" comment deletion function above),
+    or more ambitiously by adding a system where a user must be logged
+    in and then can only delete their own comments*/
+
+    var commentToDelete = $(this).data("_id");
+    //pulls the _id identifier from the data stored in the delete button
+    // and attaches it to commentToDelete for use in the AJAX request
+    
+    // AJAX delete request
+    $.ajax({
+        url: "/api/comments/" + commentToDelete,
+        method: "DELETE"
+    }).then(function() {
+        // when deletion is complete, hide the modal
+        bootbox.hideAll();
+    });
+}
 // END DELETE COMMENT HANDLER
 
 
