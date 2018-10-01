@@ -97,6 +97,55 @@ function createListing(currentArticle) {
 }
 // END CREATE SINGLE ARTICLE LISTING
 
+// DELETE ARTICLE FUNCTION
+// design note- could set up to delete from database, or could set up to "soft delete" by simply toggling the article's "saved" status back to "false"
+// this function is the hard-delete option, but I am also including a soft-delete option below
+function handleArticleDelete() {
+    //triggered when user hits button to delete an article
+    //starts by retrieving the article id that was attached to the element when it was setup
+    var articleToDelete = $(this).parents(".panel").data();
+
+    //AJAX DELETE call
+    $.ajax({
+        method: "DELETE",
+        url: "/api/articles/" + articleToDelete._id
+    })
+    .then(function(data){
+        //if successful mongoose will send back "ok: true" so can use this to check for success
+        if (data.ok) {
+            //run initialize page function again to reload the page
+            //the reloaded page will then show the saved articles less the deleted one
+            initializePage();
+        }
+    });
+};
+// END DELETE ARTICLE FUNCTION
+
+// REMOVE FROM SAVED ARTICLES LIST FUNCTION
+function handleArticleUndoSave() {
+    //triggered when user hits button "remove from saved articles"
+    //starts by retrieving the article id that was attached to the element when it was setup
+    var articleToSave = $(this).parents(".panel").data();
+    articleToSave.saved = false;
+
+    //AJAX update call
+    // patch method should be correct for updating an existing database entry
+    $.ajax({
+        method: "PATCH",
+        url: "/api/articles",
+        data: articleToSave
+    })
+    .then(function(data){
+        //if successful mongoose will send back "ok: true" so can use this to check for success
+        if (data.ok) {
+            //run initialize page function again to reload the page
+            //the reloaded page will then show the saved articles less the un-saved one
+            initializePage();
+        }
+    });
+};
+// END REMOVE FROM SAVED ARTICLES LIST FUNCTION
+
 // ====================== END FUNCTIONS  ======================== //
 
 
@@ -106,8 +155,10 @@ function createListing(currentArticle) {
 initializePage();
 
 /*  then add event listeners to dynamically generated
-buttons- "delete article", "view comments", "save comment", "delete comment" */
+buttons- "permanently delete article", "remove from saved articles", 
+"view comments", "save comment", "delete comment" */
 $(document).on("click", ".btn.delete", handleArticleDelete);
+$(document).on("click", ".btn.unsave", handleArticleUndoSave);
 $(document).on("click", ".btn.comments", handleArticleComments);
 $(document).on("click", ".btn.save", handleCommentSave);
 $(document).on("click", ".btn.comment-delete", handleCommentDelete);

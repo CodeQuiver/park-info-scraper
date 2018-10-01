@@ -1,1 +1,13 @@
 <h1>Saved</h1>
+
+<div class="article-box">
+    <!-- script will insert all saved articles here -->
+</div>
+
+{{!-- add the buttons to go with following code from js file
+buttons- "permanently delete article", "remove from saved articles", "view comments", "save comment", "delete comment" */
+$(document).on("click", ".btn.delete", handleArticleDelete);
+$(document).on("click", ".btn.unsave", handleArticleUndoSave);
+$(document).on("click", ".btn.comments", handleArticleComments);
+$(document).on("click", ".btn.save", handleCommentSave);
+$(document).on("click", ".btn.comment-delete", handleCommentDelete); --}}

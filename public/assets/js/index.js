@@ -156,4 +156,4 @@ $(document).on("click", ".new-scrape", handleArticleScrape);
 initializePage();
 
 // ====================== END MAIN PROGRAM FLOW  ======================== //
-});
+}); 
