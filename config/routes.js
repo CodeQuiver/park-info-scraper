@@ -28,13 +28,13 @@ module.exports = function(router) {
     //fetch route
     router.get("/api/fetch", function(req,res) {
         articleController.fetch(function(error, documents) {
-            if (!docs || docs.insertedCount === 0) {
+            if (!documents || documents.insertedCount === 0) {
                 res.json({
                     message: "No new spotlighted articles today. Check again tomorrow!"
                 });
             } else {
                 res.json({
-                    message: "Added " + docs.insertedCount + " new articles!"
+                    message: "Added " + documents.insertedCount + " new articles!"
                 });
             }
         });
