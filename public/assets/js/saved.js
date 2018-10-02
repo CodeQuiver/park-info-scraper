@@ -2,7 +2,8 @@
 // handles what information to display and calling of routes
 // also handles the creation and deletion of comments
 
-//****rough draft NOTE- bootbox class, need to either replace or make sure I tie in correctly in my handlebars */
+/*rough draft NOTE- bootbox class, need to either replace or make sure I tie in correctly in my 
+handlebars- should denote the modal pop-up the comments will display in */
 
 $(document).ready(function() {
 // makes sure nothing runs until page has completed loading
